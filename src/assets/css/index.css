@@ -9,7 +9,7 @@
     @apply bg-primary font-text h-full w-full;
   }
   h1 {
-    @apply text-xl font-heading font-bold md:text-3xl;
+    @apply text-xl font-heading font-black md:text-3xl;
   }
   h2 {
     @apply font-heading font-black text-xl md:text-2xl;
@@ -27,7 +27,7 @@
     @apply border-primary mt-1 my-4;
   }
   button {
-    @apply bg-primary hover:bg-yellow-400 rounded border-black border-2 px-2 py-1 my-1 font-bold;
+    @apply bg-primary hover:bg-yellow-400 rounded border-black border-2 px-2 py-1 my-1 font-bold cursor-pointer;
   }
   input {
     @apply rounded border-black border-2 px-2 py-1 my-1;
@@ -63,7 +63,7 @@
   @apply absolute bottom-0 w-full px-2 md:px-16;
 }
 .container-base {
-  @apply bg-secondary px-5 rounded-xl rounded-b-none border-4 border-b-0 border-black overscroll-contain overflow-auto h-[85vh];
+  @apply relative bg-secondary p-8 rounded-xl rounded-b-none border-4 border-b-0 border-black overscroll-contain overflow-auto h-[85vh];
 }
 .container-login {
   @apply h-[90vh];
@@ -98,4 +98,11 @@
 .level-menu {
   @apply bg-primary w-80 h-52 border-2 border-black px-8 pt-10 rounded-lg text-center;
   box-shadow: 5px 5px 0px 2px rgba(0, 0, 0, 1);
+}
+.btn-shadow {
+  @apply uppercase font-black;
+  box-shadow: 5px 5px 0px 2px rgba(0, 0, 0, 1);
+}
+.main-dialogue {
+  /* @apply; */
 }

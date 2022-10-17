@@ -1,39 +1,26 @@
 <template>
   <div>
-    <!-- <form @submit.prevent="handleSubmit">
-        <input type="text" placeholder="Ingrese url" v-model="url" />
-        <button type="submit">Agregar</button>
-      </form>
-      <p v-if="databaseStore.loadingDoc">loading docs</p>
-      <ul v-else>
-        <li v-for="item of databaseStore.documents" :key="item.id">
-          {{ item.desc_en }} - {{ item.name }}
-          <br />
-          {{ item.desc_id }}
-          <br />
-          <button @click="databaseStore.deleteUrl(item.id)">Eliminar</button>
-          <button @click="router.push(`/editar/${item.id}`)">Editar</button>
-        </li>
-      </ul> -->
-    <!-- <h1>Home</h1>
-      <p>{{ userStore.userData?.email }}</p> -->
-    <a href="/dashboard">
-      <button>Back</button>
-    </a>
-    <div class="main-menu">
-      <a
-        :href="'/dialogue/' + item.id"
-        v-for="item of databaseStore.documents"
-        :key="item.id"
-      >
-        <div class="level-menu">
-          <h2>{{ item.name }}</h2>
-          <div class="divide-y-2 divide-black uppercase mt-5">
-            <h3>{{ item.desc_id }}</h3>
-            <h3>{{ item.desc_en }}</h3>
-          </div>
+    <div class="main-dialogue">
+      <div v-for="item of databaseStore.documents" :key="item.id">
+        <div class="uppercase mb-3">
+          <h1>{{ item.name }}</h1>
+          <h1>{{ item.title }}</h1>
         </div>
-      </a>
+        <div v-for="(row, id) of item.dialog">
+          <h3>
+            <span class="text-red-800 uppercase">{{ row.name }}</span> :
+            {{ row.text }}
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="absolute right-8 bottom-8">
+      <button
+        class="btn-shadow"
+        @click="router.push('/speak/' + route.params.level)"
+      >
+        Mulai Dialog
+      </button>
     </div>
   </div>
 </template>
@@ -43,11 +30,13 @@
 // const userStore = useUserStore();
 import { useUserStore } from "../stores/user";
 import { useDatabaseStore } from "../stores/database";
-import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
+const router = useRouter();
 
 const userStore = useUserStore();
+
 const databaseStore = useDatabaseStore();
 databaseStore.getDialogues(route.params.level);
 

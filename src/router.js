@@ -7,6 +7,7 @@ import Register from "./views/Register.vue";
 import Editor from "./views/Editor.vue";
 import Dialogues from "./views/Dialogues.vue";
 import Dialogue from "./views/Dialogue.vue";
+import Speak from "./views/Speak.vue";
 
 const requireAuth = async (to, from, next) => {
   const userStore = useUserStore();
@@ -24,14 +25,15 @@ const routes = [
   { path: "/dashboard", component: Home, beforeEnter: requireAuth },
   { path: "/dialogues/:level", component: Dialogues, beforeEnter: requireAuth },
   { path: "/dialogue/:id", component: Dialogue, beforeEnter: requireAuth },
+  { path: "/speak/:id", component: Speak, beforeEnter: requireAuth },
   { path: "/", component: Login },
   { path: "/register", component: Register },
   { path: "/editor/:id", component: Editor, beforeEnter: requireAuth },
 ];
 
 const router = createRouter({
-  routes,
   history: createWebHistory(),
+  routes: routes,
 });
 
 export default router;

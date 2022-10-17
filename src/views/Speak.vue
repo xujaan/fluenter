@@ -1,27 +1,19 @@
 <template>
   <div>
-    <!-- <form @submit.prevent="handleSubmit">
-          <input type="text" placeholder="Ingrese url" v-model="url" />
-          <button type="submit">Agregar</button>
-        </form>
-        <p v-if="databaseStore.loadingDoc">loading docs</p>
-        <ul v-else>
-          <li v-for="item of databaseStore.documents" :key="item.id">
-            {{ item.desc_en }} - {{ item.name }}
-            <br />
-            {{ item.desc_id }}
-            <br />
-            <button @click="databaseStore.deleteUrl(item.id)">Eliminar</button>
-            <button @click="router.push(`/editar/${item.id}`)">Editar</button>
-          </li>
-        </ul> -->
-    <!-- <h1>Home</h1>
-        <p>{{ userStore.userData?.email }}</p> -->
     <div class="main-dialogue">
       <div class="uppercase mb-3">
         <h1>{{ item.name }}</h1>
         <h1>{{ item.title }}</h1>
       </div>
+      <table class="table-auto">
+        <tbody>
+          <tr v-for="(row, id) of item.dialog">
+            <td>{{ row.name }}</td>
+            <td>:</td>
+            <td>{{ row.text }}</td>
+          </tr>
+        </tbody>
+      </table>
       <div v-for="(row, id) of item.dialog">
         <h3>
           <span class="text-red-800 uppercase">{{ row.name }}</span> :
@@ -31,10 +23,10 @@
     </div>
     <div class="absolute right-8 bottom-8">
       <button
-        class="btn-shadow cursor-pointer"
+        class="btn-shadow"
         @click="router.push('/speak/' + route.params.id)"
       >
-        Mulai Dialog
+        Rekam
       </button>
     </div>
   </div>

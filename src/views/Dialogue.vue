@@ -1,37 +1,50 @@
 <template>
   <div>
-    <!-- <form @submit.prevent="handleSubmit">
-          <input type="text" placeholder="Ingrese url" v-model="url" />
-          <button type="submit">Agregar</button>
-        </form>
-        <p v-if="databaseStore.loadingDoc">loading docs</p>
-        <ul v-else>
-          <li v-for="item of databaseStore.documents" :key="item.id">
-            {{ item.desc_en }} - {{ item.name }}
-            <br />
-            {{ item.desc_id }}
-            <br />
-            <button @click="databaseStore.deleteUrl(item.id)">Eliminar</button>
-            <button @click="router.push(`/editar/${item.id}`)">Editar</button>
-          </li>
-        </ul> -->
-    <!-- <h1>Home</h1>
-        <p>{{ userStore.userData?.email }}</p> -->
+    <div class="w-full bg-black rounded-full h-3.5 p-0.5">
+      <div class="bg-primary h-2.5 rounded-full" style="width: 35%"></div>
+    </div>
     <div class="main-dialogue">
-      <div class="uppercase mb-3">
-        <h1>{{ item.name }}</h1>
-        <h1>{{ item.title }}</h1>
-      </div>
-      <div v-for="(row, id) of item.dialog">
-        <h3>
-          <span class="text-red-800 uppercase">{{ row.name }}</span> :
-          {{ row.text }}
-        </h3>
+      <div v-for="item of databaseStore.documents" :key="item.id">
+        <div class="uppercase mb-3">
+          <h1>{{ item.name }}</h1>
+          <h1>{{ item.title }}</h1>
+        </div>
+        <div class="dialogue-table">
+          <table class="table-auto [border-spacing:0.75rem]">
+            <tbody>
+              <tr v-for="(row, id) of item.dialog">
+                <!-- <td>
+                  <h3 class="mr-2 cursor-pointer">🔊</h3>
+                </td> -->
+                <td>
+                  <h3>
+                    <span class="text-red-800 uppercase">{{ row.name }}</span>
+                  </h3>
+                </td>
+                <td>
+                  <h3 class="mx-2">:</h3>
+                </td>
+                <td>
+                  <h3>
+                    {{ row.text }}
+                  </h3>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+    <button
+      class="btn-shadow absolute bottom-8"
+      @click="router.push('/dialogues/' + route.params.id)"
+    >
+      Kembali
+    </button>
     <div class="absolute right-8 bottom-8">
+      <button class="btn-shadow mr-5 animate-bounce">Putar Dialog</button>
       <button
-        class="btn-shadow cursor-pointer"
+        class="btn-shadow"
         @click="router.push('/speak/' + route.params.id)"
       >
         Mulai Dialog
@@ -45,19 +58,12 @@
 // const userStore = useUserStore();
 import { useUserStore } from "../stores/user";
 import { useDatabaseStore } from "../stores/database";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
-
 const userStore = useUserStore();
+
 const databaseStore = useDatabaseStore();
 databaseStore.getDialogues(route.params.id);
-
-const item = databaseStore.documents[0];
-
-const url = ref("");
-const handleSubmit = () => {
-  databaseStore.addUrl(url.value);
-};
 </script>

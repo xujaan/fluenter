@@ -1,34 +1,34 @@
 <template>
   <div>
+    <div class="w-full bg-black rounded-full h-3.5 p-0.5">
+      <div class="bg-primary h-2.5 rounded-full" style="width: 70%"></div>
+    </div>
     <div class="main-dialogue">
-      <div class="uppercase mb-3">
-        <h1>{{ item.name }}</h1>
-        <h1>{{ item.title }}</h1>
-      </div>
-      <table class="table-auto">
-        <tbody>
-          <tr v-for="(row, id) of item.dialog">
-            <td>{{ row.name }}</td>
-            <td>:</td>
-            <td>{{ row.text }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div v-for="(row, id) of item.dialog">
-        <h3>
-          <span class="text-red-800 uppercase">{{ row.name }}</span> :
-          {{ row.text }}
-        </h3>
+      <div v-for="item of databaseStore.documents" :key="item.id">
+        <div class="uppercase mb-3">
+          <h1>{{ item.name }}</h1>
+          <h1>{{ item.title }}</h1>
+        </div>
+        <div class="dialogue-record">
+          <h3>{{ item.dialog[1].text }}</h3>
+        </div>
+        <div class="dialogue-result">
+          <h3>{{ item.dialog[1].text }}</h3>
+        </div>
       </div>
     </div>
-    <div class="absolute right-8 bottom-8">
-      <button
-        class="btn-shadow"
-        @click="router.push('/speak/' + route.params.id)"
-      >
-        Rekam
-      </button>
-    </div>
+    <button
+      class="btn-shadow absolute bottom-8"
+      @click="router.push('/dialogue/' + route.params.id)"
+    >
+      Kembali
+    </button>
+    <button
+      class="btn-shadow absolute right-8 bottom-8 w-52"
+      @click="router.push('/speak/' + route.params.id)"
+    >
+      Rekam
+    </button>
   </div>
 </template>
 
@@ -37,19 +37,12 @@
 // const userStore = useUserStore();
 import { useUserStore } from "../stores/user";
 import { useDatabaseStore } from "../stores/database";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
-
 const userStore = useUserStore();
+
 const databaseStore = useDatabaseStore();
 databaseStore.getDialogues(route.params.id);
-
-const item = databaseStore.documents[0];
-
-const url = ref("");
-const handleSubmit = () => {
-  databaseStore.addUrl(url.value);
-};
 </script>

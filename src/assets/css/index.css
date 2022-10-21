@@ -104,5 +104,14 @@
   box-shadow: 5px 5px 0px 2px rgba(0, 0, 0, 1);
 }
 .main-dialogue {
-  /* @apply; */
+  @apply px-1 mt-4;
+}
+.dialogue-table {
+  @apply bg-white w-full p-4 rounded-md border-black border-2;
+}
+.dialogue-record {
+  @apply w-full py-4 bg-white border-black border-2 text-center rounded-md;
+}
+.dialogue-result {
+  @apply w-full py-4 bg-primary border-black border-2 text-center rounded-md -mt-2;
 }

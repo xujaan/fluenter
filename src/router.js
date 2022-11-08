@@ -28,7 +28,7 @@ const routes = [
   { path: "/speak/:id", component: Speak, beforeEnter: requireAuth },
   { path: "/", component: Login },
   { path: "/register", component: Register },
-  { path: "/editor/:id", component: Editor, beforeEnter: requireAuth },
+  { path: "/editor", component: Editor, beforeEnter: requireAuth },
 ];
 
 const router = createRouter({

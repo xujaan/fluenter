@@ -18,11 +18,15 @@
       <a href="#" @click="userStore.logoutUser" v-if="userStore.userData">
         <div
           class="img-user"
-          style="
-            background-image: url('/src/assets/img/default-user.svg');
-            background-size: cover;
-          "
-        ></div>
+          :style="{
+            backgroundImage: 'url(\'' + userStore.userData['photo'] + '\')',
+            backgroundPosition: 'center center',
+            backgroundSize: 'cover',
+          }"
+          referrerpolicy="no-referrer"
+        >
+          >
+        </div>
       </a>
       <h1>Fluenter</h1>
     </div>
@@ -39,4 +43,6 @@
 <script setup>
 import { useUserStore } from "./stores/user";
 const userStore = useUserStore();
+// const photo_profile = userStore.userData["photo"];
+// console.log(userStore.userData["photo"]);
 </script>

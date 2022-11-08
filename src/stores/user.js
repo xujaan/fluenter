@@ -22,7 +22,11 @@ export const useUserStore = defineStore("userStore", {
       this.loadingUser = true;
       try {
         const { user } = await signInWithPopup(auth, providerGoogle);
-        this.userData = { email: user.email, uid: user.uid };
+        this.userData = {
+          email: user.email,
+          uid: user.uid,
+          photo: user.photoURL,
+        };
         router.push("/dashboard");
       } catch (error) {
         console.log(error);
@@ -93,6 +97,7 @@ export const useUserStore = defineStore("userStore", {
               this.userData = {
                 email: user.email,
                 uid: user.uid,
+                photo: user.photoURL,
               };
             } else {
               this.userData = null;

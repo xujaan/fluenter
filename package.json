@@ -10,10 +10,12 @@
   "dependencies": {
     "@tensorflow/tfjs": "^4.0.0",
     "firebase": "^9.6.8",
+    "gtts": "^0.2.1",
     "nanoid": "^4.0.0",
     "pinia": "^2.0.11",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vue-text-to-speech": "^1.0.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.0",

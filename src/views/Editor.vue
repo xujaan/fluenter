@@ -18,7 +18,7 @@ const databaseStore = useDatabaseStore();
 const url = ref("");
 
 const handleSubmit = () => {
-  databaseStore.updateUrl(route.params.id, url.value);
+  databaseStore.updateDialogue(route.params.id, url.value);
 };
 
 onMounted(async () => {

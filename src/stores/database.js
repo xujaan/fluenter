@@ -66,7 +66,7 @@ export const useDatabaseStore = defineStore("database", {
       }
     },
 
-    async addUrl(name) {
+    async addDialogue(name) {
       try {
         const objetoDoc = {
           name: name,
@@ -83,7 +83,7 @@ export const useDatabaseStore = defineStore("database", {
       } finally {
       }
     },
-    async leerUrl(id) {
+    async readDialogue(id) {
       try {
         const docRef = doc(db, "urls", id);
         const docSnap = await getDoc(docRef);
@@ -100,7 +100,7 @@ export const useDatabaseStore = defineStore("database", {
       } finally {
       }
     },
-    async deleteUrl(id) {
+    async deleteDialogue(id) {
       try {
         const docRef = doc(db, "urls", id);
         const docSnap = await getDoc(docRef);
@@ -119,7 +119,7 @@ export const useDatabaseStore = defineStore("database", {
       } finally {
       }
     },
-    async updateUrl(id, name) {
+    async updateDialogue(id, name) {
       try {
         const docRef = doc(db, "urls", id);
         const docSnap = await getDoc(docRef);

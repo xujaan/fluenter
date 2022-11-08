@@ -1,3 +1,51 @@
+<!-- <script src="https://code.responsivevoice.org/responsivevoice.js?key=wBxJxE8H"></script> -->
+<script setup>
+// import { useUserStore } from "../stores/user";
+// const userStore = useUserStore();
+import { useUserStore } from "../stores/user";
+import { useDatabaseStore } from "../stores/database";
+import { onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+responsiveVoice.setDefaultVoice("US English Female");
+const route = useRoute();
+const router = useRouter();
+const userStore = useUserStore();
+const databaseStore = useDatabaseStore();
+databaseStore.getDialogues(route.params.id);
+
+// console.log(databaseStore.documents[0].dialog.length);
+function speech() {
+  // for (
+  //   let index = 0;
+  //   index < databaseStore.documents[0].dialog.length;
+  //   index++
+  // ) {
+  //   const element = databaseStore.documents[0].dialog[index];
+  //   console.log(element);
+  //   responsiveVoice.speak(element.text);
+  // }
+  const i = 1;
+  // while (i < databaseStore.documents[0].dialog.length) {
+  //   const element = databaseStore.documents[0].dialog[i];
+  //   console.log(element);
+  //   responsiveVoice.speak(element.text);
+  //   i++;
+  // }
+}
+
+async function play() {
+  const arr = databaseStore.documents[0].dialog;
+  for (const index in arr) {
+    console.log(index);
+    if (index / 2 == 0) {
+      responsiveVoice.speak(arr[index].text, "UK English Male");
+    } else {
+      responsiveVoice.speak(arr[index].text, "UK English Female");
+    }
+  }
+}
+</script>
+
 <template>
   <div>
     <div class="w-full bg-black rounded-full h-3.5 p-0.5">
@@ -42,28 +90,15 @@
       Kembali
     </button>
     <div class="absolute right-8 bottom-8">
-      <button class="btn-shadow mr-5 animate-bounce">Putar Dialog</button>
+      <button @click="play" class="btn-shadow mr-5 animate-bounce">
+        Putar Dialog
+      </button>
       <button
         class="btn-shadow"
         @click="router.push('/speak/' + route.params.id)"
       >
-        Mulai Dialog
+        Mulai Tes
       </button>
     </div>
   </div>
 </template>
-
-<script setup>
-// import { useUserStore } from "../stores/user";
-// const userStore = useUserStore();
-import { useUserStore } from "../stores/user";
-import { useDatabaseStore } from "../stores/database";
-import { onMounted, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-const route = useRoute();
-const router = useRouter();
-const userStore = useUserStore();
-
-const databaseStore = useDatabaseStore();
-databaseStore.getDialogues(route.params.id);
-</script>

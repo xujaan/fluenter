@@ -18,12 +18,14 @@
     <!-- <h1>Home</h1>
     <p>{{ userStore.userData?.email }}</p> -->
     <div class="main-menu">
-      <div class="level-menu cursor-pointer" @click="router.push('/dashboard')">
-        <div class="divide-y-2 divide-black uppercase mt-5">
-          <h2>Pilih Level</h2>
-          <h2>Pick Level</h2>
+      <a href="/dashboard">
+        <div class="level-menu cursor-pointer">
+          <div class="divide-y-2 divide-black uppercase mt-5">
+            <h2>Pilih Level</h2>
+            <h2>Pick Level</h2>
+          </div>
         </div>
-      </div>
+      </a>
       <div
         class="level-menu cursor-pointer"
         v-for="item of databaseStore.documents"
@@ -54,9 +56,4 @@ const router = useRouter();
 const route = useRoute();
 
 databaseStore.getDialogues(route.params.level);
-
-const url = ref("");
-const handleSubmit = () => {
-  databaseStore.addUrl(url.value);
-};
 </script>

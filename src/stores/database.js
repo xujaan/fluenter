@@ -22,13 +22,16 @@ export const useDatabaseStore = defineStore("database", {
   actions: {
     async getDialogues(level) {
       if (this.documents.length !== 0) {
-        return;
+        this.documents = [];
+        // return;
       }
       this.loadingDoc = true;
       try {
-        const q = query(collection(db, "dialog"), where("level", "==", level));
-        const querySnapshot = await getDocs(q);
+        const q = level
+          ? query(collection(db, "dialog"), where("level", "==", level))
+          : query(collection(db, "dialog"));
 
+        const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           this.documents.push({
             id: doc.id,
@@ -44,7 +47,9 @@ export const useDatabaseStore = defineStore("database", {
 
     async getLevels() {
       if (this.documents.length !== 0) {
-        return;
+        this.documents = [];
+
+        // return;
       }
       this.loadingDoc = true;
       try {

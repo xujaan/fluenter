@@ -1,31 +1,15 @@
 <template>
   <div>
-    <!-- <form @submit.prevent="handleSubmit">
-      <input type="text" placeholder="Ingrese url" v-model="url" />
-      <button type="submit">Agregar</button>
-    </form>
-    <p v-if="databaseStore.loadingDoc">loading docs</p>
-    <ul v-else>
-      <li v-for="item of databaseStore.documents" :key="item.id">
-        {{ item.desc_en }} - {{ item.name }}
-        <br />
-        {{ item.desc_id }}
-        <br />
-        <button @click="databaseStore.deleteUrl(item.id)">Eliminar</button>
-        <button @click="router.push(`/editar/${item.id}`)">Editar</button>
-      </li>
-    </ul> -->
-    <!-- <h1>Home</h1>
-    <p>{{ userStore.userData?.email }}</p> -->
     <div class="main-menu">
-      <a href="/dashboard">
-        <div class="level-menu cursor-pointer">
-          <div class="divide-y-2 divide-black uppercase mt-5">
-            <h2>Pilih Level</h2>
-            <h2>Pick Level</h2>
-          </div>
+      <!-- <a href="/dashboard"> -->
+
+      <div class="level-menu cursor-pointer" @click="router.push('/dashboard')">
+        <div class="divide-y-2 divide-black uppercase mt-5">
+          <h2>Pilih Level</h2>
+          <h2>Pick Level</h2>
         </div>
-      </a>
+      </div>
+      <!-- </a> -->
       <div
         class="level-menu cursor-pointer"
         v-for="item of databaseStore.documents"
@@ -47,13 +31,16 @@
 // const userStore = useUserStore();
 import { useUserStore } from "../stores/user";
 import { useDatabaseStore } from "../stores/database";
-import { ref } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { async } from "@firebase/util";
 
 const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
 const router = useRouter();
 const route = useRoute();
-
 databaseStore.getDialogues(route.params.level);
+// onBeforeMount(async () => {
+//   await databaseStore.getDialogues(route.params.level);
+// });
 </script>

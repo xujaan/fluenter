@@ -18,19 +18,19 @@
     <!-- <h1>Home</h1>
     <p>{{ userStore.userData?.email }}</p> -->
     <div class="main-menu">
-      <a
-        :href="'/dialogues/' + item.id"
+      <div
         v-for="item of databaseStore.documents"
         :key="item.id"
+        @click="router.push('/dialogues/' + item.id)"
       >
-        <div class="level-menu">
+        <div class="level-menu cursor-pointer">
           <h2>{{ item.name }}</h2>
           <div class="divide-y-2 divide-black uppercase mt-5">
             <h3>{{ item.desc_id }}</h3>
             <h3>{{ item.desc_en }}</h3>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </template>
@@ -40,14 +40,17 @@
 // const userStore = useUserStore();
 import { useUserStore } from "../stores/user";
 import { useDatabaseStore } from "../stores/database";
-import { ref } from "vue";
+import { onBeforeMount, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import { async } from "@firebase/util";
 
 const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
 const router = useRouter();
-
 databaseStore.getLevels();
+// onBeforeMount(async () => {
+//   await databaseStore.getLevels();
+// });
 
 const url = ref("");
 const handleSubmit = () => {

@@ -10,31 +10,33 @@
           <h1>{{ item.title }}</h1>
         </div>
         <div class="dialogue-record">
-          <h3>{{ item.dialog[1].text }}</h3>
+          <h3>
+            {{
+              item.dialog[Math.floor(Math.random() * dial[0].dialog.length)]
+                .text
+            }}
+          </h3>
         </div>
         <div class="dialogue-result">
-          <h3>{{ item.dialog[1].text }}</h3>
+          <h3>{{}}</h3>
         </div>
       </div>
     </div>
     <button
       class="btn-shadow absolute bottom-8"
-      @click="router.push('/dialogue/' + route.params.id)"
+      @click="
+        router.push('/dialogue/' + route.params.level + '/' + route.params.id)
+      "
     >
       Kembali
     </button>
-    <button
-      class="btn-shadow absolute right-8 bottom-8 w-52"
-      @click="router.push('/speak/' + route.params.id)"
-    >
+    <button class="btn-shadow absolute right-8 bottom-8 w-52" @click="">
       Rekam
     </button>
   </div>
 </template>
 
 <script setup>
-// import { useUserStore } from "../stores/user";
-// const userStore = useUserStore();
 import { useUserStore } from "../stores/user";
 import { useDatabaseStore } from "../stores/database";
 import { onMounted, ref } from "vue";
@@ -42,7 +44,7 @@ import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
-
 const databaseStore = useDatabaseStore();
-databaseStore.getDialogues(route.params.id);
+databaseStore.getDialogues(route.params.level, route.params.id);
+const dial = databaseStore.documents;
 </script>

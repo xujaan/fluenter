@@ -6,41 +6,21 @@ import { useUserStore } from "../stores/user";
 import { useDatabaseStore } from "../stores/database";
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-responsiveVoice.setDefaultVoice("US English Female");
+// responsiveVoice.setDefaultVoice("US English Female");
 const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
-databaseStore.getDialogues(route.params.id);
-
-// console.log(databaseStore.documents[0].dialog.length);
-function speech() {
-  // for (
-  //   let index = 0;
-  //   index < databaseStore.documents[0].dialog.length;
-  //   index++
-  // ) {
-  //   const element = databaseStore.documents[0].dialog[index];
-  //   console.log(element);
-  //   responsiveVoice.speak(element.text);
-  // }
-  const i = 1;
-  // while (i < databaseStore.documents[0].dialog.length) {
-  //   const element = databaseStore.documents[0].dialog[i];
-  //   console.log(element);
-  //   responsiveVoice.speak(element.text);
-  //   i++;
-  // }
-}
-
+databaseStore.getDialogues(route.params.level, route.params.id);
+console.log(route.params.level);
 async function play() {
   const arr = databaseStore.documents[0].dialog;
   for (const index in arr) {
     console.log(index);
-    if (index / 2 == 0) {
-      responsiveVoice.speak(arr[index].text, "UK English Male");
+    if (index / 2 != 0) {
+      responsiveVoice.speak(arr[index].text, "US English Male");
     } else {
-      responsiveVoice.speak(arr[index].text, "UK English Female");
+      responsiveVoice.speak(arr[index].text, "US English Female");
     }
   }
 }
@@ -60,7 +40,10 @@ async function play() {
         <div class="dialogue-table">
           <table class="table-auto [border-spacing:0.75rem]">
             <tbody>
-              <tr v-for="(row, id) of item.dialog">
+              <tr
+                v-for="(row, id) of item.dialog"
+                class="border-b-2 border-black"
+              >
                 <!-- <td>
                   <h3 class="mr-2 cursor-pointer">🔊</h3>
                 </td> -->
@@ -85,7 +68,7 @@ async function play() {
     </div>
     <button
       class="btn-shadow absolute bottom-8"
-      @click="router.push('/dialogues/' + route.params.id)"
+      @click="router.push('/dialogues/' + route.params.level)"
     >
       Kembali
     </button>
@@ -95,7 +78,9 @@ async function play() {
       </button>
       <button
         class="btn-shadow"
-        @click="router.push('/speak/' + route.params.id)"
+        @click="
+          router.push('/speak/' + route.params.level + '/' + route.params.id)
+        "
       >
         Mulai Tes
       </button>

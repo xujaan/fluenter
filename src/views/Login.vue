@@ -67,6 +67,6 @@ const handleTwitter = async () => {
 
 const user = userStore.currentUser();
 if (user) {
-  router.push("/dashboard");
+  router.resolve("/dashboard");
 }
 </script>

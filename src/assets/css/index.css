@@ -96,7 +96,7 @@
   @apply flex flex-row items-center flex-wrap justify-evenly h-full;
 }
 .level-menu {
-  @apply bg-primary w-80 h-52 border-2 border-black px-8 pt-10 rounded-lg text-center;
+  @apply bg-primary w-80 h-52 border-2 border-black px-8 pt-10 rounded-lg text-center m-4;
   box-shadow: 5px 5px 0px 2px rgba(0, 0, 0, 1);
 }
 .btn-shadow {

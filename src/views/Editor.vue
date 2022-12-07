@@ -27,44 +27,23 @@
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { useDatabaseStore } from "../stores/database";
+// import datadial from "../../public/data.json";
 const route = useRoute();
 const databaseStore = useDatabaseStore();
-
 const url = ref("");
 databaseStore.getDialogues();
-
+let testarr = JSON.parse(JSON.stringify());
+// console.log(testarr);
 const handleSubmit = () => {
-  databaseStore.updateDialogue(route.params.id, url.value);
+  // databaseStore.updateDialogue(route.params.id, url.value);
+  for (let index = 0; index < testarr.length; index++) {
+    // const element = array[index];
+    console.log(index);
+    databaseStore.addDialogue(testarr[index]);
+  }
 };
 
 // onMounted(async () => {
 //   url.value = await databaseStore.leerUrl(route.params.id);
 // });
 </script>
-<!-- {
-  "id": 2,
-  "name": "Dialog 1-2",
-  "dialog": [
-    {
-      "name": "Antono",
-      "text": "Halo"
-    },
-    {
-      "text": "Hi",
-      "name": "Antoni"
-    },
-    {
-      "name": "Antono",
-      "text": "How are you?"
-    },
-    {
-      "text": "I'm good",
-      "name": "Antoni"
-    }
-  ],
-  "desc_en": "Activities",
-  "desc_id": "Aktivitas",
-  "title": "Conversation",
-  "level": "2",
-  "role": "Antoni"
-} -->

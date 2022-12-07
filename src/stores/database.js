@@ -54,14 +54,6 @@ export const useDatabaseStore = defineStore("database", {
         // return;
       } else {
         console.log("no");
-        this.users = [
-          {
-            status: "1",
-            rank: "0",
-            dialog: "1",
-            level: "1",
-          },
-        ];
         try {
           let newuser = [
             {
@@ -81,7 +73,7 @@ export const useDatabaseStore = defineStore("database", {
         } catch (error) {
           console.log(error);
         } finally {
-          router.push("/dashboard");
+          router.push("/welcome");
         }
       }
     },

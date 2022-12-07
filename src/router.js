@@ -8,6 +8,7 @@ import Editor from "./views/Editor.vue";
 import Dialogues from "./views/Dialogues.vue";
 import Dialogue from "./views/Dialogue.vue";
 import Speak from "./views/Speak.vue";
+import Welcome from "./views/Welcome.vue";
 
 const requireAuth = async (to, from, next) => {
   const userStore = useUserStore();
@@ -33,6 +34,7 @@ const routes = [
   { path: "/", component: Login },
   { path: "/register", component: Register },
   { path: "/editor", component: Editor, beforeEnter: requireAuth },
+  { path: "/welcome", component: Welcome, beforeEnter: requireAuth },
 ];
 
 const router = createRouter({

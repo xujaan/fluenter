@@ -99,7 +99,8 @@
   @apply bg-primary w-80 h-52 border-2 border-black px-8 pt-10 rounded-lg text-center m-4;
   box-shadow: 5px 5px 0px 2px rgba(0, 0, 0, 1);
 }
-.btn-shadow {
+.btn-shadow,
+.dropdown-toggle {
   @apply uppercase font-black;
   box-shadow: 5px 5px 0px 2px rgba(0, 0, 0, 1);
 }
@@ -114,4 +115,7 @@
 }
 .dialogue-result {
   @apply w-full py-4 bg-primary border-black border-2 text-center rounded-md -mt-2;
+}
+.main-score {
+  @apply flex flex-row items-center flex-wrap justify-evenly mt-24;
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-menu">
-      <div v-for="item of databaseStore.documents" :key="item.id">
+      <div v-for="item of databaseStore.levels" :key="item.id">
         <div
           v-if="item.id > parseInt(getValue(user, '0.level'))"
           class="grayscale"
@@ -17,7 +17,7 @@
         <div v-else>
           <div
             class="level-menu cursor-pointer"
-            @click="router.push('/dialogues/' + item.id)"
+            @click="router.push('/dialogue/' + item.id)"
           >
             <h2>{{ item.name }}</h2>
             <div class="divide-y-2 divide-black uppercase mt-5">

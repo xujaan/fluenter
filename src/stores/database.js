@@ -22,8 +22,11 @@ function getValue(object, string, defaultValue = "") {
 export const useDatabaseStore = defineStore("database", {
   state: () => ({
     documents: [],
+    dialogue: [],
+    conversation: [],
+    levels: [],
     users: [],
-    // pengguna: null,
+    alluser: [],
     loadingDoc: false,
   }),
   actions: {
@@ -61,6 +64,7 @@ export const useDatabaseStore = defineStore("database", {
               rank: "0",
               dialog: "1",
               level: "1",
+              name: auth.currentUser.displayName,
               uid: auth.currentUser.uid,
             },
           ];
@@ -77,8 +81,79 @@ export const useDatabaseStore = defineStore("database", {
         }
       }
     },
+    async getAlluser(id) {
+      this.alluser = [];
+      this.loadingDoc = true;
+      try {
+        var q = "";
+        q = query(collection(db, "pengguna"));
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          this.alluser.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.loadingDoc = false;
+      }
+    },
+    async getConversation(id) {
+      this.conversation = [];
+      this.loadingDoc = true;
+      try {
+        var q = "";
+        q = query(collection(db, "dialog"), where("id", "==", parseInt(id)));
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          this.conversation.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.loadingDoc = false;
+      }
+    },
+    async getDialogue(level) {
+      this.dialogue = [];
+      this.loadingDoc = true;
+      try {
+        var q = "";
+        if (level) {
+          q = query(
+            collection(db, "dialog"),
+            where("id", ">", 0),
+            where("level", "==", parseInt(level)),
+            orderBy("id", "asc")
+          );
+        } else {
+          q = query(collection(db, "dialog"), orderBy("id", "asc"));
+        }
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          this.dialogue.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.loadingDoc = false;
+      }
+    },
 
     async getDialogues(level, id) {
+      // this.documents = [];
+
       if (this.documents.length !== 0) {
         this.documents = [];
 
@@ -115,8 +190,8 @@ export const useDatabaseStore = defineStore("database", {
     },
 
     async getLevels() {
-      if (this.documents.length !== 0) {
-        this.documents = [];
+      if (this.levels.length !== 0) {
+        this.levels = [];
 
         // return;
       }
@@ -128,7 +203,7 @@ export const useDatabaseStore = defineStore("database", {
         );
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-          this.documents.push({
+          this.levels.push({
             id: doc.id,
             ...doc.data(),
           });

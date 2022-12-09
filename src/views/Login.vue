@@ -1,28 +1,9 @@
 <template>
   <div class="login-page">
     <div class="img-login">
-      <img src="./../assets/img/Conversation _Outline.svg" />
+      <img src="../assets/img/ConversationOutline.svg" />
     </div>
     <div class="form-login">
-      <h1>Login</h1>
-      <form @submit.prevent="handleSubmit">
-        <input
-          type="email"
-          placeholder="Email"
-          v-model.trim="email"
-          class="mr-3"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          v-model.trim="password"
-          class="mr-3"
-        />
-        <button :disabled="userStore.loadingUser">Login</button>
-        <div>
-          <a href="/register" class="underline italic">Buat akun baru</a>
-        </div>
-      </form>
       <div class="relative py-4">
         <div class="absolute inset-0 flex items-center">
           <div class="w-full border-b border-black"></div>

@@ -26,6 +26,7 @@ export const useUserStore = defineStore("userStore", {
           email: user.email,
           uid: user.uid,
           photo: user.photoURL,
+          name: user.displayName,
         };
         router.push("/dashboard");
       } catch (error) {
@@ -98,6 +99,7 @@ export const useUserStore = defineStore("userStore", {
                 email: user.email,
                 uid: user.uid,
                 photo: user.photoURL,
+                name: user.displayName,
               };
             } else {
               this.userData = null;

@@ -1,11 +1,18 @@
 <template>
-  <div>
-    <h1>Selamat Datang</h1>
+  <div class="flex flex-col justify-center items-center">
+    <h1 class="bg-black text-primary p-5 rounded-md">Halo, {{ user.name }}</h1>
+    <div
+      class="divide-y-2 divide border-black border-y-2 divide-black text-center mt-10"
+    >
+      <h2>Selamat datang di Fluenter</h2>
+      <h2>Dalam Fluenter terdapat beberapa level untuk kamu kuasai</h2>
+      <h2>Selamat mencoba</h2>
+    </div>
     <button
-      class="btn-shadow absolute right-8 bottom-8 w-52"
+      class="btn-shadow bottom-8 w-52 mt-10"
       @click="router.push('/dashboard')"
     >
-      Pilih Level
+      Yuk Mulai Belajar
     </button>
   </div>
 </template>
@@ -21,4 +28,6 @@ const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
 databaseStore.getDialogues(route.params.level, route.params.id);
 const dial = databaseStore.documents;
+let user = userStore.userData;
+databaseStore.loadingDoc = true;
 </script>

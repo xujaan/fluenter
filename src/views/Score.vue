@@ -15,15 +15,18 @@
           class="border-black border-2 rounded-lg py-8 px-24 bg-primary text-center"
         >
           <p class="font-bold text-lg">SKOR KAMU</p>
-          <h1 class="text-7xl">30</h1>
+          <h1 class="text-7xl">{{ score }}</h1>
         </div>
       </div>
     </div>
-    <button class="btn-shadow absolute bottom-8 w-40" @click="router.go(-1)">
+    <button
+      class="btn-shadow md:absolute bottom-8 w-40 mt-20 md:mt-0"
+      @click="router.go(-1)"
+    >
       Ulangi Tes
     </button>
     <button
-      class="btn-shadow absolute right-8 bottom-8 w-64"
+      class="btn-shadow md:absolute right-8 bottom-8 w-64"
       @click="router.push('/dialogue/' + route.params.level)"
     >
       Dialog Selanjutnya
@@ -43,6 +46,7 @@ const databaseStore = useDatabaseStore();
 if (databaseStore.conversation.length == 0) {
   databaseStore.getConversation(route.params.id);
 }
+let score = ref(Math.floor(Math.random() * 100));
 const dial = databaseStore.conversation;
 
 function getValue(object, string, defaultValue = "") {

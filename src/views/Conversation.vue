@@ -39,13 +39,13 @@
       </div>
     </div>
     <button
-      class="btn-shadow absolute bottom-8"
+      class="btn-shadow md:absolute bottom-8"
       @click="router.push('/dialogue/' + route.params.level)"
     >
       Kembali
     </button>
-    <div class="absolute right-8 bottom-8">
-      <button @click="play" class="btn-shadow mr-5 animate-bounce">
+    <div class="md:absolute right-8 bottom-8">
+      <button @click="play" class="btn-shadow mr-5 md:animate-bounce">
         Putar Dialog
       </button>
       <button

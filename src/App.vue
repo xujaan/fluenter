@@ -61,7 +61,7 @@
           </li>
         </ul>
       </div>
-      <h1>Fluenter</h1>
+      <h1 v-if="route.fullPath !== '/'">Fluenter</h1>
     </div>
 
     <div class="container-parent">
@@ -82,7 +82,7 @@ import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from "./stores/user";
 const router = useRouter();
-
+const route = useRoute();
 const userStore = useUserStore();
 const toggledrop = ref(false);
 </script>

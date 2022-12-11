@@ -63,7 +63,7 @@
   @apply absolute bottom-0 w-full px-2 md:px-16;
 }
 .container-base {
-  @apply relative bg-secondary p-8 rounded-xl rounded-b-none border-4 border-b-0 border-black overscroll-contain overflow-auto h-[85vh];
+  @apply relative bg-secondary md:p-8 p-2 rounded-xl rounded-b-none border-4 border-b-0 border-black overscroll-contain overflow-auto h-[85vh];
 }
 .container-login {
   @apply h-[90vh];
@@ -75,22 +75,22 @@
   @apply font-black text-5xl content-end;
 }
 .login-page {
-  @apply grid grid-cols-2;
+  @apply grid md:grid-cols-2;
 }
 .img-login {
-  @apply place-self-end;
+  @apply place-self-end w-full md:w-auto flex justify-center md:flex-none;
 }
 .img-login img {
-  @apply w-[50vw] max-w-none;
+  @apply w-3/4 md:w-[50vw] max-w-none border-b-4 border-black md:border-0;
 }
 .form-login {
-  @apply bg-secondary px-10 rounded-xl rounded-b-none border-4 border-b-0 border-black overscroll-contain overflow-auto h-full flex flex-col justify-center;
+  @apply bg-secondary px-10 rounded-xl rounded-b-none border-4 border-b-0 border-black overscroll-contain overflow-auto h-full flex flex-col justify-start pt-5 md:pt-20;
 }
 .btn-google {
   @apply self-center mt-5;
 }
 .img-user {
-  @apply h-20 w-20 bg-secondary rounded-full border-black border-4;
+  @apply h-16 w-16 md:h-20 md:w-20 bg-secondary rounded-full border-black border-4;
 }
 .main-menu {
   @apply flex flex-row items-center flex-wrap justify-evenly h-full;

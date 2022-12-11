@@ -63,6 +63,130 @@ export const useDatabaseStore = defineStore("database", {
               status: "1",
               rank: "0",
               dialog: "1",
+              dialog_name: "Dialog 1-1",
+              score_total: 0,
+              score: [
+                {
+                  dialog_id: 1,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 2,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 3,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 4,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 5,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 6,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 7,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 8,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 9,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 10,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 11,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 12,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 13,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 14,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 15,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 16,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 17,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 18,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 19,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 20,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 21,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 22,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 23,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 24,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 25,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 26,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 27,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 28,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 29,
+                  dialog_score: 0,
+                },
+                {
+                  dialog_id: 30,
+                  dialog_score: 0,
+                },
+              ],
               level: "1",
               name: auth.currentUser.displayName,
               uid: auth.currentUser.uid,
@@ -270,9 +394,9 @@ export const useDatabaseStore = defineStore("database", {
       } finally {
       }
     },
-    async updateDialogue(id, name) {
+    async updateUser(id, level, dialog, dialog_name, rank) {
       try {
-        const docRef = doc(db, "urls", id);
+        const docRef = doc(db, "pengguna", id);
         const docSnap = await getDoc(docRef);
         if (!docSnap.exists()) {
           throw new Error("No existe el doc");
@@ -282,10 +406,21 @@ export const useDatabaseStore = defineStore("database", {
           throw new Error("No le pertenece ese documento");
         }
         await updateDoc(docRef, {
-          name: name,
+          level: level,
+          dialog: dialog,
+          dialog_name: dialog_name,
+          rank: rank,
         });
         this.documents = this.documents.map((item) =>
-          item.id === id ? { ...item, name: name } : item
+          item.id === id
+            ? {
+                ...item,
+                level: level,
+                dialog: dialog,
+                dialog_name: dialog_name,
+                rank: rank,
+              }
+            : item
         );
         router.push("/");
       } catch (error) {

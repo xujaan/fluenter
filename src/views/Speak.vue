@@ -31,7 +31,7 @@
       Kembali
     </button>
     <button
-      class="btn-shadow absolute right-8 bottom-8 w-52"
+      class="btn-shadow absolute right-8 bottom-8 md:w-52"
       @click="
         router.push('/score/' + route.params.level + '/' + route.params.id)
       "

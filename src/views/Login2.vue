@@ -4,20 +4,32 @@
       <img src="../assets/img/ConversationOutline.svg" />
     </div>
     <div class="form-login">
-      <h1>Fluenter</h1>
-      <div>
-        <h1>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </h1>
-      </div>
-      <div class="relative py-4 md:mt-5">
+      <h1>Login</h1>
+      <form @submit.prevent="handleSubmit">
+        <input
+          type="email"
+          placeholder="Email"
+          v-model.trim="email"
+          class="mr-3"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          v-model.trim="password"
+          class="mr-3"
+        />
+        <button :disabled="userStore.loadingUser">Login</button>
+        <div>
+          <a href="/register" class="underline italic">Buat akun baru</a>
+        </div>
+      </form>
+      <div class="relative py-4">
         <div class="absolute inset-0 flex items-center">
           <div class="w-full border-b border-black"></div>
         </div>
         <div class="relative flex justify-center">
           <span class="px-4 text-sm font-bold text-black bg-secondary"
-            >LANJUTKAN LOGIN</span
+            >Pilihan lain</span
           >
         </div>
       </div>
@@ -36,6 +48,7 @@ import { useUserStore } from "../stores/user";
 import router from "../router";
 
 const userStore = useUserStore();
+
 const email = ref("");
 const password = ref("");
 

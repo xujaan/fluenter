@@ -46,7 +46,7 @@ const databaseStore = useDatabaseStore();
 if (databaseStore.conversation.length == 0) {
   databaseStore.getConversation(route.params.id);
 }
-let score = ref(Math.floor(Math.random() * 100));
+let score = databaseStore.score;
 const dial = databaseStore.conversation;
 
 function getValue(object, string, defaultValue = "") {

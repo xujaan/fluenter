@@ -39,6 +39,14 @@
           <li>
             <div
               class="rounded-t bg-primary hover:bg-yellow-400 py-2 px-4 block whitespace-no-wrap cursor-pointer"
+              @click="router.push('/dashboard')"
+            >
+              Pilih Level
+            </div>
+          </li>
+          <li>
+            <div
+              class="rounded-t bg-primary hover:bg-yellow-400 py-2 px-4 block whitespace-no-wrap cursor-pointer"
               @click="router.push('/account')"
             >
               Akun

@@ -28,6 +28,7 @@ export const useDatabaseStore = defineStore("database", {
     users: [],
     alluser: [],
     loadingDoc: false,
+    score: 0,
   }),
   actions: {
     async getUser() {
@@ -60,9 +61,9 @@ export const useDatabaseStore = defineStore("database", {
         try {
           let newuser = [
             {
-              status: "1",
-              rank: "0",
-              dialog: "1",
+              status: 1,
+              rank: 0,
+              dialog: 1,
               dialog_name: "Dialog 1-1",
               score_total: 0,
               score: [
@@ -394,7 +395,7 @@ export const useDatabaseStore = defineStore("database", {
       } finally {
       }
     },
-    async updateUser(id, level, dialog, dialog_name, rank) {
+    async updateUser(id, level, dialog, dialog_name, score_total, score, rank) {
       try {
         const docRef = doc(db, "pengguna", id);
         const docSnap = await getDoc(docRef);
@@ -402,27 +403,30 @@ export const useDatabaseStore = defineStore("database", {
           throw new Error("No existe el doc");
         }
 
-        if (docSnap.data().user !== auth.currentUser.uid) {
+        if (docSnap.data().uid !== auth.currentUser.uid) {
           throw new Error("No le pertenece ese documento");
         }
         await updateDoc(docRef, {
           level: level,
           dialog: dialog,
           dialog_name: dialog_name,
+          score_total: score_total,
+          score: score,
           rank: rank,
         });
-        this.documents = this.documents.map((item) =>
+        this.users = this.documents.map((item) =>
           item.id === id
             ? {
                 ...item,
                 level: level,
                 dialog: dialog,
                 dialog_name: dialog_name,
+                score_total: score_total,
+                score: score,
                 rank: rank,
               }
             : item
         );
-        router.push("/");
       } catch (error) {
         console.log(error);
       } finally {

@@ -1,6 +1,15 @@
 <template>
   <div>
     <div class="main-menu">
+      <div
+        class="md:inline hidden bg-primary btn-shadow border-2 border-black px-8 md:pt-10 rounded-lg text-center m-4 cursor-pointer w-full h-30 md:w-80 md:h-52"
+        @click="router.push('/dashboard')"
+      >
+        <div class="divide-y-2 divide-black uppercase md:mt-5">
+          <h2>Pilih Level</h2>
+          <h2>Pick Level</h2>
+        </div>
+      </div>
       <div v-for="item of databaseStore.dialogue" :key="item.id">
         <div
           v-if="item.id > parseInt(getValue(user, '0.dialog'))"
@@ -28,7 +37,7 @@
         </div>
       </div>
       <div
-        class="bg-primary btn-shadow border-2 border-black px-8 md:pt-10 rounded-lg text-center m-4 cursor-pointer w-full h-30 md:w-80 md:h-52"
+        class="md:hidden bg-primary btn-shadow border-2 border-black px-8 md:pt-10 rounded-lg text-center m-4 cursor-pointer w-full h-30 md:w-80 md:h-52"
         @click="router.push('/dashboard')"
       >
         <div class="divide-y-2 divide-black uppercase md:mt-5">

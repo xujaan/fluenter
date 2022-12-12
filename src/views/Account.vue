@@ -12,7 +12,7 @@
           {{ getValue(users, "0.level") }}
         </h1>
         <h3>Dialog</h3>
-        <h1 class="text-5xl border-b-2 border-black">
+        <h1 class="text-2xl border-b-2 border-black">
           {{ getValue(users, "0.dialog_name") }}
         </h1>
         <h3>Peringkat</h3>

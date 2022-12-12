@@ -3,7 +3,6 @@ import { useUserStore } from "./stores/user";
 
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
-import Register from "./views/Register.vue";
 import Editor from "./views/Editor.vue";
 import Dialogue from "./views/Dialogue.vue";
 import Conversation from "./views/Conversation.vue";
@@ -28,7 +27,7 @@ const requireAuth = async (to, from, next) => {
 const routes = [
   { path: "/dashboard", component: Home, beforeEnter: requireAuth },
   {
-    path: "/dialogue/:id",
+    path: "/dialogue/:level",
     component: Dialogue,
     beforeEnter: requireAuth,
   },
@@ -40,7 +39,6 @@ const routes = [
   { path: "/speak/:level/:id", component: Speak, beforeEnter: requireAuth },
   { path: "/score/:level/:id", component: Score, beforeEnter: requireAuth },
   { path: "/", component: Login },
-  { path: "/register", component: Register },
   { path: "/editor", component: Editor, beforeEnter: requireAuth },
   { path: "/welcome", component: Welcome, beforeEnter: requireAuth },
   { path: "/account", component: Account, beforeEnter: requireAuth },

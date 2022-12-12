@@ -6,11 +6,11 @@
       >
         <div
           class="grid gap-4"
-          v-for="item of databaseStore.alluser"
+          v-for="(item, n, i) of databaseStore.alluser"
           :key="item.id"
         >
           <div>
-            <h2>{{ item.rank + ". " + item.name }}</h2>
+            <h2>{{ n + 1 + ". " + item.name }}</h2>
           </div>
         </div>
       </div>

@@ -52,8 +52,7 @@ const handleTwitter = async () => {
   await userStore.loginTwitter();
 };
 
-const user = userStore.currentUser();
-if (user) {
-  router.push("/dashboard");
+if (userStore.userData !== null) {
+  location.href = "/dashboard";
 }
 </script>

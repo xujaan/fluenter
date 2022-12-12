@@ -54,10 +54,8 @@ export const useDatabaseStore = defineStore("database", {
       }
       if (getValue(this.users, "0.uid") == auth.currentUser.uid) {
         // this.users = [];
-        console.log("yes");
-        // return;
+        return;
       } else {
-        console.log("no");
         try {
           let newuser = [
             {

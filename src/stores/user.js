@@ -84,7 +84,7 @@ export const useUserStore = defineStore("userStore", {
       try {
         await signOut(auth);
         this.userData = null;
-        router.push("/");
+        router.go(0);
       } catch (error) {
         console.log(error);
       }

@@ -67,7 +67,6 @@ function randint() {
   randomint = Math.floor(Math.random() * getValue(dial, "0.dialog").length);
 }
 
-console.log(databaseStore.score);
 function getValue(object, string, defaultValue = "") {
   return _.get(object, string, defaultValue);
 }
@@ -76,15 +75,25 @@ function endDialog() {
   databaseStore.score = scoreresult;
 
   let id = getValue(user, "0.id");
-  let level = parseInt(getValue(user, "0.level"));
-  let dialog = parseInt(getValue(user, "0.dialog")) + 1;
+  let level = getValue(user, "0.level");
+  let dialog =
+    getValue(user, "0.dialog") == 30
+      ? getValue(user, "0.dialog")
+      : getValue(user, "0.dialog") + 1;
   let dialog_name = "Dialog " + level + "-" + dialog;
-  let score_total = 0;
+
   let score = getValue(user, "0.score");
   score[dialog - 2]["dialog_score"] = parseInt(scoreresult);
   let rank = 0;
-  console.log(score[0]);
-  console.log(parseInt(scoreresult));
+  if (getValue(user, "0.dialog") == 9 || getValue(user, "0.dialog") == 19) {
+    level = level + 1;
+  } else if (getValue(user, "0.dialog") == 30) {
+    level = level;
+  }
+  let score_total = score.reduce((accumulator, object) => {
+    return accumulator + object.dialog_score;
+  }, 0);
+
   databaseStore.updateUser(
     id,
     level,

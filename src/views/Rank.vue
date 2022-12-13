@@ -18,7 +18,9 @@
         class="text-center bg-primary px-20 py-5 border-black border-2 rounded-md"
       >
         <h2>PERINGKAT KAMU</h2>
-        <h1 class="text-9xl">{{ getValue(users, "0.rank") }}</h1>
+        <h1 class="text-9xl">
+          {{ parseInt(getKey(alluser, { uid: user.uid })) + 1 }}
+        </h1>
       </div>
     </div>
 
@@ -38,13 +40,17 @@ const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
-databaseStore.getUser();
 databaseStore.getAlluser();
+databaseStore.getUser();
 const users = databaseStore.users;
-let user = userStore.userData;
-// let alluser = databaseStore.alluser;
-// const key = Object.keys(alluser).find((key) => alluser[key] === "xujaan");
-console.log(key);
+const user = userStore.userData;
+const alluser = databaseStore.alluser;
+
+console.log(getValue(alluser, "1.name"));
+
+function getKey(object, string, defaultValue = "") {
+  return _.findKey(object, string);
+}
 function getValue(object, string, defaultValue = "") {
   return _.get(object, string, defaultValue);
 }

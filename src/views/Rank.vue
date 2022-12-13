@@ -42,6 +42,9 @@ databaseStore.getUser();
 databaseStore.getAlluser();
 const users = databaseStore.users;
 let user = userStore.userData;
+// let alluser = databaseStore.alluser;
+// const key = Object.keys(alluser).find((key) => alluser[key] === "xujaan");
+console.log(key);
 function getValue(object, string, defaultValue = "") {
   return _.get(object, string, defaultValue);
 }

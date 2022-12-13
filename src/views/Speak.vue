@@ -4,14 +4,15 @@
       <div class="bg-primary h-2.5 rounded-full" style="width: 70%"></div>
     </div>
     <div class="main-dialogue">
-      <div v-for="item of databaseStore.conversation" :key="item.id">
+      <div>
         <div class="uppercase mb-3">
-          <h1>{{ item.name }}</h1>
-          <h1>{{ item.title }}</h1>
+          <h1>{{ getValue(dial, "0.name") }}</h1>
+          <h1>{{ getValue(dial, "0.title") }}</h1>
         </div>
         <div class="dialogue-record">
           <h3>
-            {{ item.dialog[randomint].text }}
+            <!-- {{ item.dialog[randomint].text }} -->
+            {{ getValue(dial, "0.dialog." + randomint + ".text") }}
           </h3>
         </div>
         <div class="dialogue-result">
@@ -55,10 +56,10 @@ const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
-if (databaseStore.conversation.length == 0) {
-  databaseStore.getUser();
-  databaseStore.getConversation(route.params.id);
-}
+databaseStore.getUser();
+databaseStore.getConversation(route.params.id);
+// if (databaseStore.conversation.length == 0) {
+// }
 const user = databaseStore.users;
 const dial = databaseStore.conversation;
 const selesai = ref(false);
@@ -66,28 +67,35 @@ let randomint = Math.floor(Math.random() * getValue(dial, "0.dialog").length);
 function randint() {
   randomint = Math.floor(Math.random() * getValue(dial, "0.dialog").length);
 }
-
 function getValue(object, string, defaultValue = "") {
   return _.get(object, string, defaultValue);
 }
+
 function endDialog() {
+  let currentdial = getValue(dial, "0.id");
   let scoreresult = Math.floor(Math.random() * 100);
   databaseStore.score = scoreresult;
 
   let id = getValue(user, "0.id");
   let level = getValue(user, "0.level");
-  let dialog =
-    getValue(user, "0.dialog") == 30
-      ? getValue(user, "0.dialog")
-      : getValue(user, "0.dialog") + 1;
+  let dialog = getValue(user, "0.dialog");
   let dialog_name = "Dialog " + level + "-" + dialog;
-
   let score = getValue(user, "0.score");
-  score[dialog - 2]["dialog_score"] = parseInt(scoreresult);
   let rank = 0;
+  if (dialog == 30) {
+    dialog = 30;
+  } else if (currentdial < dialog) {
+    dialog = dialog;
+  } else {
+    dialog = dialog + 1;
+  }
+  score[dialog - 1]["dialog_score"] = parseInt(scoreresult);
+
   if (getValue(user, "0.dialog") == 9 || getValue(user, "0.dialog") == 19) {
     level = level + 1;
-  } else if (getValue(user, "0.dialog") == 30) {
+    // } else if (getValue(user, "0.dialog") == 30) {
+    //   level = level;
+  } else {
     level = level;
   }
   let score_total = score.reduce((accumulator, object) => {

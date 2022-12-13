@@ -4,10 +4,10 @@
       <div class="bg-primary h-2.5 rounded-full" style="width: 100%"></div>
     </div>
     <div class="main-dialogue">
-      <div v-for="item of databaseStore.conversation" :key="item.id">
+      <div>
         <div class="uppercase mb-3">
-          <h1>{{ item.name }}</h1>
-          <h1>{{ item.title }}</h1>
+          <h1>{{ getValue(dial, "0.name") }}</h1>
+          <h1>{{ getValue(dial, "0.title") }}</h1>
         </div>
       </div>
       <div class="main-score">
@@ -42,11 +42,16 @@ import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
+
 const databaseStore = useDatabaseStore();
-if (databaseStore.conversation.length == 0) {
-  databaseStore.getConversation(route.params.id);
-}
+// if (databaseStore.conversation.length == 0) {
+// }
+databaseStore.getUser();
+
+databaseStore.getConversation(route.params.id);
 let score = databaseStore.score;
+
+const user = databaseStore.users;
 const dial = databaseStore.conversation;
 
 function getValue(object, string, defaultValue = "") {

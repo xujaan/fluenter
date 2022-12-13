@@ -186,7 +186,7 @@ export const useDatabaseStore = defineStore("database", {
                   dialog_score: 0,
                 },
               ],
-              level: "1",
+              level: 1,
               name: auth.currentUser.displayName,
               uid: auth.currentUser.uid,
             },
@@ -209,7 +209,7 @@ export const useDatabaseStore = defineStore("database", {
       this.loadingDoc = true;
       try {
         var q = "";
-        q = query(collection(db, "pengguna"));
+        q = query(collection(db, "pengguna"), orderBy("score_total", "desc"));
 
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {

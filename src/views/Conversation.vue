@@ -4,16 +4,16 @@
       <div class="bg-primary h-2.5 rounded-full" style="width: 35%"></div>
     </div>
     <div class="main-dialogue">
-      <div v-for="item of databaseStore.conversation" :key="item.id">
+      <div>
         <div class="uppercase mb-3">
-          <h1>{{ item.name }}</h1>
-          <h1>{{ item.title }}</h1>
+          <h1>{{ getValue(dial, "0.name") }}</h1>
+          <h1>{{ getValue(dial, "0.title") }}</h1>
         </div>
         <div class="dialogue-table">
           <table class="table-auto [border-spacing:0.75rem]">
             <tbody>
               <tr
-                v-for="(row, id) of item.dialog"
+                v-for="(row, id) of getValue(dial, '0.dialog')"
                 class="border-b-2 border-black"
               >
                 <!-- <td>
@@ -73,9 +73,7 @@ const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 const databaseStore = useDatabaseStore();
-if (databaseStore.conversation.length == 0) {
-  databaseStore.getConversation(route.params.id);
-}
+databaseStore.getConversation(route.params.id);
 // console.log(route.params.level);
 const dial = databaseStore.conversation;
 

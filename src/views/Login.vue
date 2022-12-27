@@ -4,11 +4,11 @@
       <img src="../assets/img/ConversationOutline.svg" />
     </div>
     <div class="form-login">
-      <h1>Fluenter</h1>
-      <div>
+      <h1 class="text-5xl">Fluenter</h1>
+      <div class="mt-5">
         <h1>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Belajar fasih berbahasa inggris secara bertahap menggunakan bahan
+          pembelajaran American English
         </h1>
       </div>
       <div class="relative py-4 md:mt-5">

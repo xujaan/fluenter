@@ -15,8 +15,8 @@
             {{ getValue(dial, "0.dialog." + randomint + ".text") }}
           </h3>
         </div>
-        <div class="dialogue-result">
-          <h3>{{}}</h3>
+        <div class="dialogue-result text-gray-500">
+          <h3>{{ getValue(dial, "0.dialog." + randomint + ".text") }}</h3>
         </div>
       </div>
       <div class="flex justify-center mt-12">

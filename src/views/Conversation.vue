@@ -79,17 +79,30 @@ const dial = databaseStore.conversation;
 
 async function play() {
   const arr = getValue(dial, "0.dialog");
-  for (const index in arr) {
-    // console.log(index);
-    // console.log(arr[index].gender);
+  console.log(Object.keys(arr).length);
+  for (let index = 0; index < Object.keys(arr).length; index++) {
+    // const element = array[index];
+    console.log(index);
+    console.log(arr[index]);
     if (arr[index].gender == "m") {
-      responsiveVoice.speak(arr[index].text, "US English Male");
-      // console.log("male");
+      await responsiveVoice.speak(arr[index].text, "US English Male");
+      console.log("male");
     } else {
-      responsiveVoice.speak(arr[index].text, "US English Female");
-      // console.log("female");
+      await responsiveVoice.speak(arr[index].text, "US English Female");
+      console.log("female");
     }
   }
+  // for (const index in arr) {
+  // console.log(index);
+  // console.log(arr[index].gender);
+  // if (arr[index].gender == "m") {
+  // responsiveVoice.speak(arr[index].text, "US English Male");
+  // console.log("male");
+  // } else {
+  // responsiveVoice.speak(arr[index].text, "US English Female");
+  // console.log("female");
+  // }
+  // }
 }
 
 function getValue(object, string, defaultValue = "") {

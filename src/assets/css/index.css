@@ -63,7 +63,7 @@
   @apply absolute bottom-0 w-full px-2 md:px-16;
 }
 .container-base {
-  @apply relative bg-secondary md:p-8 p-2 rounded-xl rounded-b-none border-4 border-b-0 border-black overscroll-contain overflow-auto h-[85vh];
+  @apply relative bg-secondary md:p-8 p-2 rounded-xl rounded-b-none border-4 border-b-0 border-black overscroll-contain overflow-auto h-[82vh] md:h-[85vh];
 }
 .container-login {
   @apply h-[90vh];

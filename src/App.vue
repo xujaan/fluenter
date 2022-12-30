@@ -14,9 +14,7 @@
               backgroundSize: 'cover',
             }"
             referrerpolicy="no-referrer"
-          >
-            >
-          </div>
+          ></div>
         </a>
         <ul
           class="dropdown-toggle divide-black divide-y-4 dropdown-menu absolute font-semibold border-2 mt-2 border-black rounded-md"

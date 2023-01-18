@@ -15,7 +15,22 @@
           class="border-black border-2 rounded-lg py-8 px-24 bg-primary text-center"
         >
           <p class="font-bold text-lg">SKOR KAMU</p>
-          <h1 class="text-7xl">{{ score }}</h1>
+          <h1 class="text-7xl">
+            {{ totalscore }}
+          </h1>
+          <div class="mt-3 border-t-2 border-black pt-3">
+            <h3>
+              Akurasi: {{ getValue(score, "data.NBest.0.AccuracyScore") }}
+            </h3>
+            <h3>
+              Kefasihan: {{ getValue(score, "data.NBest.0.FluencyScore") }}
+            </h3>
+            <h3>
+              Ketuntasan:
+              {{ getValue(score, "data.NBest.0.CompletenessScore") }}
+            </h3>
+            <h3>Pengucapan: {{ getValue(score, "data.NBest.0.PronScore") }}</h3>
+          </div>
         </div>
       </div>
     </div>
@@ -49,7 +64,15 @@ const databaseStore = useDatabaseStore();
 databaseStore.getUser();
 
 databaseStore.getConversation(route.params.id);
-let score = databaseStore.score;
+let score = databaseStore.resultscore;
+console.log(score);
+let accuracy = getValue(score, "data.NBest.0.AccuracyScore");
+let fluency = getValue(score, "data.NBest.0.FluencyScore");
+let completeness = getValue(score, "data.NBest.0.CompletenessScore");
+let pronunciation = getValue(score, "data.NBest.0.PronScore");
+
+let totalscore = (accuracy + fluency + completeness + pronunciation) / 4;
+console.log(totalscore);
 
 const user = databaseStore.users;
 const dial = databaseStore.conversation;

@@ -27,6 +27,7 @@ export const useDatabaseStore = defineStore("database", {
     levels: [],
     users: [],
     alluser: [],
+    resultscore: [],
     loadingDoc: false,
     score: 0,
   }),

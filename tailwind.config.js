@@ -10,8 +10,8 @@ module.exports = {
         text: ["Montserrat", "sans-serif"],
       },
       colors: {
-        primary: colors.yellow["500"],
-        secondary: colors.pink["400"],
+        primary: colors.yellow["400"],
+        secondary: colors.pink["300"],
         error: colors.red["500"],
       },
       dropShadow: {

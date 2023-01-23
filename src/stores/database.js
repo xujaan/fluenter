@@ -28,12 +28,14 @@ export const useDatabaseStore = defineStore("database", {
     users: [],
     alluser: [],
     resultscore: [],
-    loadingDoc: false,
+    randomdialog: 0,
     score: 0,
+    loadingDoc: false,
   }),
   actions: {
     async getUser() {
       this.users = [];
+      this.loadingDoc = true;
       try {
         const q = query(
           collection(db, "pengguna"),
@@ -238,6 +240,7 @@ export const useDatabaseStore = defineStore("database", {
             id: doc.id,
             ...doc.data(),
           });
+          this.randomdialog = getValue(this.conversation, "0.dialog").length;
         });
       } catch (error) {
         console.log(error);

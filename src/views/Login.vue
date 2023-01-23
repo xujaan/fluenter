@@ -4,9 +4,9 @@
       <img src="../assets/img/ConversationOutline.svg" />
     </div>
     <div class="form-login">
-      <h1 class="text-5xl">Fluenter</h1>
+      <h1 class="text-7xl">Fluenter</h1>
       <div class="mt-5">
-        <h1>
+        <h1 class="text-5xl">
           Belajar fasih berbahasa inggris secara bertahap menggunakan bahan
           pembelajaran American English
         </h1>
@@ -16,13 +16,13 @@
           <div class="w-full border-b border-black"></div>
         </div>
         <div class="relative flex justify-center">
-          <span class="px-4 text-sm font-bold text-black bg-secondary"
+          <span class="px-4 text-xl font-bold text-black bg-secondary"
             >LANJUTKAN LOGIN</span
           >
         </div>
       </div>
       <button @click="handleGoogle" class="btn-google">
-        <img src="../assets/img/google-btn.svg" width="300" />
+        <img src="../assets/img/google-btn.svg" width="500" />
       </button>
       <!-- <button type="button" @click="handleTwitter">Login with Twitter</button> -->
     </div>

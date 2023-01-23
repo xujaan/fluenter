@@ -49,7 +49,7 @@
     </div>
 
     <div class="container-parent">
-      <div v-if="!userStore.loadingSession">
+      <div v-if="!userStore.loadingSession || !databaseStore.loadingDoc">
         <router-view class="container-base" v-if="userStore.userData">
         </router-view>
         <router-view class="container-login" v-else></router-view>
@@ -65,8 +65,10 @@
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from "./stores/user";
+import { useDatabaseStore } from "./stores/database";
 const router = useRouter();
 const route = useRoute();
 const userStore = useUserStore();
+const databaseStore = useDatabaseStore();
 const toggledrop = ref(false);
 </script>

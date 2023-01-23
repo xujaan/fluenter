@@ -97,20 +97,16 @@ databaseStore.getConversation(route.params.id);
 // }
 const user = databaseStore.users;
 const dial = databaseStore.conversation;
-
+console.log(databaseStore.randomdialog);
 const selesai = ref(false);
-let randomint = Math.floor(Math.random() * getValue(dial, "0.dialog").length);
-function randint() {
-  randomint = Math.floor(Math.random() * getValue(dial, "0.dialog").length);
-}
+let randomint = Math.floor(Math.random() * databaseStore.randomdialog);
+
+// function randint() {
+//   randomint = Math.floor(Math.random() * getValue(dial, "0.dialog").length);
+// }
 function getValue(object, string, defaultValue = "") {
   return _.get(object, string, defaultValue);
 }
-let referenceText = getValue(dial, "0.dialog." + randomint + ".text");
-let pronAssessmentParamsJson =
-  `{"ReferenceText":"` +
-  referenceText +
-  `","GradingSystem":"HundredMark","Dimension":"Comprehensive"}`;
 
 function endDialog(scoreres) {
   let accuracy = getValue(scoreres, "data.NBest.0.AccuracyScore");
@@ -164,15 +160,7 @@ function endDialog(scoreres) {
 
 setupAPI();
 // intialize API ------------------
-let AXIOS_HEADERS = {
-  // 'Content-Type': 'audio/wav',
-  "Content-Type": "audio/wav; codecs=audio/pcm; samplerate=16000",
-  "Ocp-Apim-Subscription-Key": "3411efc5fd654b158d07da550c40388c",
-  // Host: 'southeastasia.stt.speech.microsoft.com',
-  "Transfer-Encoding": "chunked",
-  Expect: "100-continue",
-  "Pronunciation-Assessment": window.btoa(pronAssessmentParamsJson),
-};
+
 let AXIOS_URL = `https://southeastasia.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-us`;
 
 async function setupAPI() {
@@ -333,6 +321,23 @@ async function stop() {
 }
 
 function sendToAPI() {
+  databaseStore.loadingDoc = true;
+  let referenceText = getValue(dial, "0.dialog." + randomint + ".text");
+  let pronAssessmentParamsJson =
+    `{"ReferenceText":"` +
+    referenceText +
+    `","GradingSystem":"HundredMark","Dimension":"Comprehensive"}`;
+  let AXIOS_HEADERS = {
+    // 'Content-Type': 'audio/wav',
+    "Content-Type": "audio/wav; codecs=audio/pcm; samplerate=16000",
+    "Ocp-Apim-Subscription-Key": "3411efc5fd654b158d07da550c40388c",
+    // Host: 'southeastasia.stt.speech.microsoft.com',
+    "Transfer-Encoding": "chunked",
+    Expect: "100-continue",
+    "Pronunciation-Assessment": window.btoa(
+      unescape(encodeURIComponent(pronAssessmentParamsJson))
+    ),
+  };
   let fd = new FormData();
   fd.append("audio_file", finalWAV);
   console.log("hasil wav");
@@ -345,7 +350,8 @@ function sendToAPI() {
       endDialog(res);
       router.push("/score/" + route.params.level + "/" + route.params.id);
     })
-    .catch((e) => console.log(e.response));
+    .catch((e) => console.log(e.response))
+    .finally((databaseStore.loadingDoc = false));
 }
 
 function pause() {

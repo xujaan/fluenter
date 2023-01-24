@@ -16,7 +16,7 @@
           </h3>
         </div>
         <div class="dialogue-result text-gray-500">
-          <h3>{{ getValue(dial, "0.dialog." + randomint + ".text") }}</h3>
+          <h3 ref="recresult"></h3>
         </div>
       </div>
       <div class="flex justify-center mt-12">
@@ -64,6 +64,7 @@ import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { async } from "@firebase/util";
 import axios from "axios";
+import { computed } from "@vue/reactivity";
 
 let buttonrecord = ref(false);
 // initialize mic
@@ -99,6 +100,7 @@ const user = databaseStore.users;
 const dial = databaseStore.conversation;
 console.log(databaseStore.randomdialog);
 const selesai = ref(false);
+const recresult = ref("");
 let randomint = Math.floor(Math.random() * databaseStore.randomdialog);
 
 // function randint() {
@@ -318,6 +320,7 @@ async function stop() {
   // link.setAttribute('href', audioUrl);
   // link.download = 'output.wav';
   // selesai = true;
+  sendToAPIsimple();
 }
 
 function sendToAPI() {
@@ -349,6 +352,42 @@ function sendToAPI() {
       databaseStore.resultscore = res;
       endDialog(res);
       router.push("/score/" + route.params.level + "/" + route.params.id);
+    })
+    .catch((e) => console.log(e.response))
+    .finally((databaseStore.loadingDoc = false));
+}
+function sendToAPIsimple() {
+  databaseStore.loadingDoc = true;
+  // let referenceText = getValue(dial, "0.dialog." + randomint + ".text");
+  // let pronAssessmentParamsJson =
+  //   `{"ReferenceText":"` +
+  //   referenceText +
+  //   `","GradingSystem":"HundredMark","Dimension":"Comprehensive"}`;
+  let AXIOS_HEADERS = {
+    // 'Content-Type': 'audio/wav',
+    "Content-Type": "audio/wav; codecs=audio/pcm; samplerate=16000",
+    "Ocp-Apim-Subscription-Key": "3411efc5fd654b158d07da550c40388c",
+    // Host: 'southeastasia.stt.speech.microsoft.com',
+    "Transfer-Encoding": "chunked",
+    Expect: "100-continue",
+    // "Pronunciation-Assessment": window.btoa(
+    //   unescape(encodeURIComponent(pronAssessmentParamsJson))
+    // ),
+  };
+  let fd = new FormData();
+  fd.append("audio_file", finalWAV);
+  console.log("hasil wav");
+  console.log(finalWAV);
+  axios
+    .post(AXIOS_URL, finalWAV, { headers: AXIOS_HEADERS })
+    .then((res) => {
+      console.log(res);
+      recresult = computed(() => {
+        res.value;
+      });
+      // databaseStore.resultscore = res;
+      // endDialog(res);
+      // router.push("/score/" + route.params.level + "/" + route.params.id);
     })
     .catch((e) => console.log(e.response))
     .finally((databaseStore.loadingDoc = false));

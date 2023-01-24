@@ -6,12 +6,12 @@
     <div class="form-login">
       <h1 class="text-7xl">Fluenter</h1>
       <div class="mt-5">
-        <h1 class="text-5xl">
+        <h1 class="text-4xl">
           Belajar fasih berbahasa inggris secara bertahap menggunakan bahan
           pembelajaran American English
         </h1>
       </div>
-      <div class="relative py-4 md:mt-5">
+      <div class="relative py-10 md:mt-5">
         <div class="absolute inset-0 flex items-center">
           <div class="w-full border-b border-black"></div>
         </div>

@@ -15,8 +15,14 @@
             {{ getValue(dial, "0.dialog." + randomint + ".text") }}
           </h3>
         </div>
-        <div class="dialogue-result text-gray-500">
-          <h3 ref="recresult"></h3>
+        <div class="dialogue-result">
+          <h3 ref="recori"></h3>
+          <h4 ref="judulhasil"></h4>
+          <h3 ref="recresult">
+            <i class="text-gray-500">{{
+              getValue(dial, "0.dialog." + randomint + ".text")
+            }}</i>
+          </h3>
         </div>
       </div>
       <div class="flex justify-center mt-12">
@@ -100,9 +106,14 @@ const user = databaseStore.users;
 const dial = databaseStore.conversation;
 console.log(databaseStore.randomdialog);
 const selesai = ref(false);
-const recresult = ref("");
+const recresult = ref();
+const judulhasil = ref();
 let randomint = Math.floor(Math.random() * databaseStore.randomdialog);
-
+const recori = ref();
+// onMounted(() => {
+//   recori.value.innerHTML = getValue(dial, "0.dialog." + randomint + ".text");
+//   console.log(getValue(dial, "0.dialog." + randomint + ".text"));
+// });
 // function randint() {
 //   randomint = Math.floor(Math.random() * getValue(dial, "0.dialog").length);
 // }
@@ -381,13 +392,15 @@ function sendToAPIsimple() {
   axios
     .post(AXIOS_URL, finalWAV, { headers: AXIOS_HEADERS })
     .then((res) => {
-      console.log(res);
-      recresult = computed(() => {
-        res.value;
-      });
+      console.log(res.data.DisplayText);
+      recresult.value.innerHTML = res.data.DisplayText;
       // databaseStore.resultscore = res;
       // endDialog(res);
       // router.push("/score/" + route.params.level + "/" + route.params.id);
+      var a = getValue(dial, "0.dialog." + randomint + ".text");
+      recori.value.innerHTML =
+        arraysEqual(getWords(a), getWords(res.data.DisplayText)) + "<hr/>";
+      judulhasil.value.innerHTML = "Hasil Rekaman:";
     })
     .catch((e) => console.log(e.response))
     .finally((databaseStore.loadingDoc = false));
@@ -401,16 +414,24 @@ function resume() {
   recording = true;
   context.resume();
 }
-// document.querySelector("#record").onclick = (e) => {
-//   console.log("Start recording");
-//   start();
-// };
 
-// document.querySelector("#stop").onclick = (e) => {
-//   stop();
-// };
+function getWords(text) {
+  let x = text.replace(/[^A-Za-z0-9]+/g, " ");
+  let newArr = x.trim().split(" ");
+  return newArr;
+}
 
-// document.querySelector("#send").onclick = (e) => {
-//   sendToAPI();
-// };
+function arraysEqual(a, b) {
+  var l = a.length > b.length ? a : b;
+  var r = [];
+  for (var i = 0; i < l.length; ++i) {
+    r.push(
+      a[i].toLowerCase() !== b[i].toLowerCase()
+        ? "<span class='text-red-600'>" + a[i] + "</span>"
+        : "<span class='text-green-800'>" + a[i] + "</span>"
+    );
+  }
+  return r.join(" ");
+}
+// arraysEqual(a, b);
 </script>

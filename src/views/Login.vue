@@ -4,19 +4,19 @@
       <img src="../assets/img/ConversationOutline.svg" />
     </div>
     <div class="form-login">
-      <h1 class="text-7xl">Fluenter</h1>
-      <div class="mt-5">
-        <h1 class="text-4xl">
+      <h1 class="text-4xl md:text-7xl">Fluenter</h1>
+      <div class="my-3 md:mt-5">
+        <h1 class="text-md md:text-4xl">
           Belajar fasih berbahasa inggris secara bertahap menggunakan bahan
           pembelajaran American English
         </h1>
       </div>
-      <div class="relative py-10 md:mt-5">
+      <div class="relative md:py-10 md:mt-5">
         <div class="absolute inset-0 flex items-center">
           <div class="w-full border-b border-black"></div>
         </div>
         <div class="relative flex justify-center">
-          <span class="px-4 text-xl font-bold text-black bg-secondary"
+          <span class="px-4 md:text-xl font-bold text-black bg-secondary"
             >LANJUTKAN LOGIN</span
           >
         </div>

@@ -147,7 +147,7 @@ function endDialog(scoreres) {
   } else {
     dialog = dialog + 1;
   }
-  score[dialog - 1]["dialog_score"] = parseInt(scoreresult);
+  score[dialog - 2]["dialog_score"] = parseInt(scoreresult);
 
   if (getValue(user, "0.dialog") == 9 || getValue(user, "0.dialog") == 19) {
     level = level + 1;

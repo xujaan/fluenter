@@ -71,7 +71,9 @@ let fluency = getValue(score, "data.NBest.0.FluencyScore");
 let completeness = getValue(score, "data.NBest.0.CompletenessScore");
 let pronunciation = getValue(score, "data.NBest.0.PronScore");
 
-let totalscore = (accuracy + fluency + completeness + pronunciation) / 4;
+let totalscore = parseInt(
+  (accuracy + fluency + completeness + pronunciation) / 4
+);
 console.log(totalscore);
 
 const user = databaseStore.users;
